@@ -14,14 +14,20 @@ public class NavigationPage {
     private final SelenideElement mp3PlayersMenu = $x("//a[normalize-space()='MP3 Players']");
     private final SelenideElement allMP3PlayersMenu = $x("//a[normalize-space()='Show All MP3 Players']");
 
-    //navigating trough URLS
+    //navigating
     public void openMainPage() {
         open("https://demo.opencart.com/");
     }
 
+    public void openLaptopsPage() {
+        clickLaptopsAndNotebooksMenu();
+        clickAllLaptopsAndNotebooksMenu();
+    }
 
-    //filling and clearing
-
+    public void openMp3Page() {
+        clickMP3PlayersMenu();
+        clickAllMP3PlayersMenu();
+    }
 
     //clicks
     public void clickLaptopsAndNotebooksMenu() {

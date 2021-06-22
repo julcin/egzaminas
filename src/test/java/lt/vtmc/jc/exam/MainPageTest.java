@@ -1,13 +1,10 @@
 package lt.vtmc.jc.exam;
 
-import com.codeborne.selenide.Condition;
 import com.codeborne.selenide.Selenide;
 import org.junit.Assert;
 import org.junit.Before;
 import org.junit.Test;
 
-import static com.codeborne.selenide.Selenide.*;
-import static com.codeborne.selenide.Condition.*;
 
 public class MainPageTest {
 

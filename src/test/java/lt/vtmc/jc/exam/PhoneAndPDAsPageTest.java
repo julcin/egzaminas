@@ -11,11 +11,27 @@ public class PhoneAndPDAsPageTest {
     @Before
     public void setupMainPage() {
         navigation.openMainPage();
+        navigation.clickPhonesAndPDAsMenu();
     }
 
     @Test
     public void phonesAndPDAsExists() {
-        navigation.clickPhonesAndPDAsMenu();
         products.getProductElements().shouldHave(CollectionCondition.sizeGreaterThan(0));
+    }
+
+    @Test
+    public void checkPhonesAndPDAsAvailability() throws CustomException {
+        //file reading not implemented yet
+        String phonesExceptionString = "";
+        for (int i = 0; products.getProductElements().size() > i; i++) {
+            products.getProductElements().get(i).click();
+            if (!products.getProductAvailabilityString().getText().equals("Availability: In Stock")) {
+                phonesExceptionString += "\nSkiltyje Phones And PDAs prekės " + products.getProductNameInsideCard().getText() + " pasiekiamumas yra \"" + products.getProductAvailabilityString().getText().replace("Availability: ", "") + "\", ";
+            }
+            navigation.clickPhonesAndPDAsMenu();
+        }
+        if (phonesExceptionString.length() > 1) {
+            throw new CustomException(phonesExceptionString);
+        }
     }
 }

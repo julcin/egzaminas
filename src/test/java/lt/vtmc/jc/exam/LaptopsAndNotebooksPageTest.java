@@ -11,13 +11,27 @@ public class LaptopsAndNotebooksPageTest {
     @Before
     public void setupMainPage() {
         navigation.openMainPage();
+        navigation.openLaptopsPage();
     }
 
     @Test
     public void laptopsAndNotebooksExists() {
-        navigation.clickLaptopsAndNotebooksMenu();
-        navigation.clickAllLaptopsAndNotebooksMenu();
         products.getProductElements().shouldHave(CollectionCondition.sizeGreaterThan(0));
-//        System.out.println(products.getProductNames().get(0).getText());
+    }
+
+    @Test
+    public void checkLaptopsAvailability() throws CustomException {
+        //file reading not implemented yet
+        String laptopsExceptionString = "";
+        for (int i = 0; products.getProductElements().size() > i; i++) {
+            products.getProductElements().get(i).click();
+            if (!products.getProductAvailabilityString().getText().equals("Availability: In Stock")) {
+                laptopsExceptionString += "\nSkiltyje Laptops and Notebooks prekės " + products.getProductNameInsideCard().getText() + " pasiekiamumas yra \"" + products.getProductAvailabilityString().getText().replace("Availability: ", "") + "\", ";
+            }
+            navigation.openLaptopsPage();
+        }
+        if (laptopsExceptionString.length() > 1) {
+            throw new CustomException(laptopsExceptionString);
+        }
     }
 }
